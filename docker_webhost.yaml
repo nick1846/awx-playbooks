@@ -26,8 +26,10 @@
         name: "{{ packages }}"
         state: present        
       vars:
-        packages: python3-pip        
-
+        packages: 
+          - python3-pip        
+          - python-devel
+          
     - name: Upgrade pip
       shell: "python3 -m pip install --user --upgrade pip"     
 
