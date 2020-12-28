@@ -40,10 +40,14 @@
       git:
         repo: https://github.com/nick1846/docker.git 
         dest: /home/ec2-user/docker      
-
-    - name: deploy Docker Compose app
-      docker_compose:
+        
+    - name: docker-compose via ansible docker_service
+      docker_service:
         project_src: /home/ec2-user/docker/docker-compose
-        state: absent
+        project_name: "docker-compose"
+        state: present
+        restarted: true
+
+    -
 
     
