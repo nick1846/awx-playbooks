@@ -11,43 +11,38 @@
 
     - name: Install epel (centos) via amazon-linux-extras packages
       shell: "sudo amazon-linux-extras install epel -y"
-      
-    
-    - name: Ensure a list of yum packages are installed
-      yum:
-        name: "{{ packages }}"
-        state: present        
-      vars:
-        packages: 
-          - python3-pip        
-          - python-devel
-             
-    - name: Pip install docker for Ansible's docker_login and docker_service modules
-      pip:
-        name: ["docker-py", "docker-compose"]         
 
-   # - name: Install docker-ce (centos) via amazon-linux-extras packages
-    #  shell: "amazon-linux-extras install docker=18.06.1 -y"
+    - name: Install docker-ce (centos) via amazon-linux-extras packages
+      shell: "amazon-linux-extras install docker=18.06.1 -y"
 
     - name: Enable Docker CE service at startup
       service:
         name: docker
         state: started
-        enabled: yes   
-      
-    
+        enabled: yes
+
+    - name: Ensure a list of yum packages are installed
+      yum:
+        name: "{{ packages }}"
+        state: present        
+      vars:
+        packages: python3-pip        
+
+    - name: Upgrade pip
+      shell: "python3 -m pip install --user --upgrade pip"     
+
+    - name: Install docker-compose
+      shell: "python3 -m pip install docker-compose"      
+
     - name: Clone a repo with separate git directory
       git:
         repo: https://github.com/nick1846/docker.git 
-        dest: /home/ec2-user/docker      
+        dest: /home/ec2-user/docker
+      
+    - name: deploy Docker Compose app
+      shell: 
+        cmd: "docker-compose -f docker-compose.yml up -d"
+        chdir: /docker-compose/
         
-    - name: docker-compose via ansible docker_service
-      docker_service:
-        project_src: /home/ec2-user/docker/docker-compose
-        project_name: "docker-compose"
-        state: present
-        restarted: true
-
-    -
-
+    
     
