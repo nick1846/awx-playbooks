@@ -12,15 +12,14 @@
     - name: Ensure a list of yum packages are installed
       yum:
         name: "{{ packages }}"
-        state: present
-        update_cache: yes
+        state: present        
       vars:
         packages:
-        - python-pip
-        - yum-utils
-        - device-mapper-persistent-data
-        - lvm2
-        - amazon-linux-extras
+          - python-pip
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - amazon-linux-extras
 
     - name: Add extras repository
       shell: yum-config-manager --enable extras
