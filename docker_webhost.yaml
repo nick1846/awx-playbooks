@@ -24,7 +24,7 @@
              
     - name: Pip install docker for Ansible's docker_login and docker_service modules
       pip:
-        name: ["docker", "docker-compose"]         
+        name: ["docker-py", "docker-compose"]         
 
    # - name: Install docker-ce (centos) via amazon-linux-extras packages
     #  shell: "amazon-linux-extras install docker=18.06.1 -y"
