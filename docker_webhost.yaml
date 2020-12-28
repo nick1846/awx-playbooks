@@ -27,14 +27,14 @@
         state: present        
       vars:
         packages: 
-          - python3-pip        
+          - python-pip        
           - python-devel
           
     - name: Upgrade pip
       shell: "python3 -m pip install --user --upgrade pip"     
 
     - name: Install docker-compose
-      shell: "python3 -m pip install docker-compose"      
+      shell: "python -m pip install docker-compose"      
 
     - name: Clone a repo with separate git directory
       git:
