@@ -12,7 +12,7 @@
     - name: Ensure a list of yum packages are installed
       yum:
         name: "{{ packages }}"
-        state: latest
+        state: present
         update_cache: yes
       vars:
         packages:
