@@ -42,7 +42,7 @@
     - name: deploy Docker Compose app
       shell: 
         cmd: "docker-compose -f docker-compose.yml up -d"
-        chdir: /docker-compose/
+        #chdir: /docker-compose/
         
     
     
