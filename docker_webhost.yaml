@@ -41,8 +41,8 @@
         update: no
 
     - name: deploy Docker Compose app
-      docker_compose:
-        project_src: /home/ec2-user/docker/docker-compose
-        files: docker-compose.yml
+      shell:
+        - cd /home/ec2-user/docker/docker-compose
+        - docker-compose up -d
 
     
