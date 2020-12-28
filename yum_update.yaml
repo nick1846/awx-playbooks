@@ -4,6 +4,11 @@
   tasks: 
     - name: Updating yum packages 
       yum:
-        name: *
+<<<<<<< HEAD
+     
+        
+=======
+        name: "*"
         state: latest 
         update_only: yes
+>>>>>>> 2b847c8d76e7e9e4a4052e399e5a4def1fda5522
