@@ -11,16 +11,8 @@
 
     - name: Install epel (centos) via amazon-linux-extras packages
       shell: "sudo amazon-linux-extras install epel -y"
-
-    - name: Install docker-ce (centos) via amazon-linux-extras packages
-      shell: "amazon-linux-extras install docker=18.06.1 -y"
-
-    - name: Enable Docker CE service at startup
-      service:
-        name: docker
-        state: started
-        enabled: yes
-
+      
+    
     - name: Ensure a list of yum packages are installed
       yum:
         name: "{{ packages }}"
@@ -29,13 +21,21 @@
         packages: 
           - python3-pip        
           - python-devel
-          
-    - name: Upgrade pip
-      shell: "python3 -m pip install --user --upgrade pip"     
+             
+    - name: Pip install docker for Ansible's docker_login and docker_service modules
+      pip:
+        name: ["docker", "docker-compose"]         
 
-    - name: Install docker-compose
-      shell: "python3 -m pip install docker-compose"      
+   # - name: Install docker-ce (centos) via amazon-linux-extras packages
+    #  shell: "amazon-linux-extras install docker=18.06.1 -y"
 
+    - name: Enable Docker CE service at startup
+      service:
+        name: docker
+        state: started
+        enabled: yes   
+      
+    
     - name: Clone a repo with separate git directory
       git:
         repo: https://github.com/nick1846/docker.git 
