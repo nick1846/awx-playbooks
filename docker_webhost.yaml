@@ -9,20 +9,8 @@
         state: latest
         update_only: yes
 
-    - name: Ensure a list of yum packages are installed
-      yum:
-        name: "{{ packages }}"
-        state: present        
-      vars:
-        packages:
-          - python-pip
-          - yum-utils
-          - device-mapper-persistent-data
-          - lvm2
-          - amazon-linux-extras
-
-    - name: Add extras repository
-      shell: yum-config-manager --enable extras
+    - name: Install epel (centos) via amazon-linux-extras packages
+      shell: "sudo amazon-linux-extras install epel -y"
 
     - name: Install docker-ce (centos) via amazon-linux-extras packages
       shell: "amazon-linux-extras install docker=18.06.1 -y"
@@ -33,9 +21,19 @@
         state: started
         enabled: yes
 
-    - name: Ensure Python pip packages are installed
-      pip:
-        name: docker-compose     
+    - name: Ensure a list of yum packages are installed
+      yum:
+        name: "{{ packages }}"
+        state: present        
+      vars:
+        packages:
+          - python3-pip        
+
+    - name: Upgrade pip
+      shell: "python3 -m pip install --user --upgrade pip"     
+
+    - name: Install docker-compose
+      shell: "python3 -m pip install docker-compose"      
 
     - name: Clone a repo with separate git directory
       git:
