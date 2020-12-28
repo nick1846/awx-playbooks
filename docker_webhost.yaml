@@ -12,7 +12,7 @@
     - name: Ensure a list of yum packages are installed
       yum:
         name: "{{ packages }}"
-        state: present        
+        state: absent        
       vars:
         packages:
           - python-pip
