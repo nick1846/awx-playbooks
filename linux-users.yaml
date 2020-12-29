@@ -1,27 +1,28 @@
 ---
 
-- name: Make sure we have a 'wheel' group
-  group:
-    name: wheel
-    state: present
+- hosts: all
+  become: true
+  tasks:
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
 
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
 
-- name: Allow 'wheel' group to have passwordless sudo
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: '^%wheel'
-    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
-
-
-- name: Create users
-  user:
-    name: "{{ item }}"         
-    groups: docker, wheel
-    append: yes 
-    state: present
-    create_home: yes
-  with_items: "{{ required_users }}"
+    - name: Create users
+      user:
+        name: "{{ item }}"         
+        groups: docker, wheel
+        append: yes 
+        state: present
+        create_home: yes
+      with_items: "{{ required_users }}" 
 
 
