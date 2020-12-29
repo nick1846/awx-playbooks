@@ -11,11 +11,17 @@
       yum:
         name: nginx
         state: present
+        
+    - name: Clone a repo with separate git directory
+      git:
+        repo: https://github.com/nick1846/web-zhanyl.git
+        dest: /home/ec2-user/webhost
 
     - name: add index.html file
-      template:
-        src: index.html
-        dest: /usr/share/nginx/html/index.html
+      copy:
+        src: /home/ec2-user/webhost/
+        dest: /usr/share/nginx/html/
+        remote_src: yes 
    
     - name: Start Nginx
       service:
