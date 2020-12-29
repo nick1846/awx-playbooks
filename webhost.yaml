@@ -14,7 +14,7 @@
 
     - name: add index.html file
       template:
-        src: ./index.html
+        src: index.html
         dest: /usr/share/nginx/html/index.html
    
     - name: Start Nginx
