@@ -39,16 +39,13 @@
         repo: https://github.com/nick1846/docker.git 
         dest: /home/ec2-user/dockergit@github.com:nick1846/awx-playbooks.git
         
-  #  - name:  Start Docker Compose 
-   #   docker_service:
-  #      project_src: "/home/ec2-user/docker/docker-compose"       
-  #      files: docker-compose.yml"       
-  #      state: present
+    - name:  Start Docker Compose 
+      docker_service:
+        project_src: "/home/ec2-user/docker/docker-compose"       
+        files: docker-compose.yml"       
+        state: present
       
-    - name: deploy Docker Compose web
-      shell: docker-compose up -d
-      args:
-        chdir: /home/ec2-user/docker/docker-compose
+    
         
         
         
