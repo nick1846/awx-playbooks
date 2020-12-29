@@ -25,9 +25,3 @@
   with_items: "{{ required_users }}"
 
 
-- name: Add SSH public keys for users
-  authorized_key:
-    user: "{{ item }}"
-    state: present
-    key: "{{ lookup('file', 'id_awx.pub') }}"
-  with_items: "{{ required_users }}"
