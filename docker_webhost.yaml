@@ -40,7 +40,7 @@
         dest: /home/ec2-user/dockergit@github.com:nick1846/awx-playbooks.git
         
     - name:  Start Docker Compose 
-      docker_service:
+      docker_compose:
         project_src: "/home/ec2-user/docker/docker-compose"       
         files: docker-compose.yml"       
         state: present
