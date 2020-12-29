@@ -48,7 +48,7 @@
     - name: deploy Docker Compose web
       shell: docker-compose up -d
       args:
-        chdir: /home/ec2-user/docker/docker-compose/docker-compose.yml
+        chdir: /home/ec2-user/docker/docker-compose
         
         
         
