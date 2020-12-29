@@ -46,9 +46,10 @@
   #      state: present
       
     - name: deploy Docker Compose web
-      shell: |
-        cd /home/ec2-user/docker/docker-compose
-        docker-compose up -d
+      shell: docker-compose up -d
+      args:
+        chdir: /home/ec2-user/docker/docker-compose/docker-compose.yml
+        
         
         
     
